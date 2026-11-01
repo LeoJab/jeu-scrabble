@@ -120,7 +120,7 @@ button, input { font: inherit; color: inherit; }
 @media (max-height: 740px) and (max-aspect-ratio: 11/10) { #histBox { display: none; } #reacts { display: none; } :root { --bs: min(calc(100vw - 16px), calc(100dvh - 300px)); } }
 
 /* Overlays */
-.rules { text-align: left; max-height: 92dvh; display: flex; flex-direction: column; width: min(94vw, 520px); }
+.card.rules { text-align: left; max-height: 92dvh; display: flex; flex-direction: column; width: min(94vw, 520px); }
 .rules h2 { text-align: center; }
 .rbody { overflow-y: auto; padding-right: 4px; font-size: 14px; font-weight: 700; }
 .rbody h3 { margin: 12px 0 2px; color: var(--blue); font-size: 15px; }
