@@ -325,8 +325,13 @@ function renderRack() {
 }
 
 const away = p => !roomPlayers.some(x => x.id === p.id);
+const avatars = {}; // photos de profil reçues des autres joueurs
+const avatarOf = p => p.avatar || avatars[p.id] || (p.id === me.id ? me.avatar : null);
+const okUrl = u => typeof u === 'string' && u.length < 600 && /^(https?:\/\/|\/)/.test(u);
+function sayHi() { if (room && me.avatar) room.send({ t: 'hi', av: me.avatar }); }
 function avatarHTML(p, i) {
-  if (p.id === me.id && me.avatar) return `<img class="av" src="${esc(me.avatar)}" data-chadgang-id="${esc(p.id)}" alt="">`;
+  const u = avatarOf(p);
+  if (u && okUrl(u)) return `<img class="av" src="${esc(u)}" data-chadgang-id="${esc(p.id)}" alt="">`;
   return `<span class="av" data-chadgang-id="${esc(p.id)}" style="background:${COLS[i % 4]}">${esc(p.name.trim().charAt(0).toUpperCase())}</span>`;
 }
 let lastScores = {};
@@ -390,7 +395,7 @@ function updatePreview() {
 function renderEnd() {
   if (!S || S.phase !== 'over') { $('#endOv').classList.remove('on'); return; }
   const rows = S.pl.map((p, i) => ({ p, i })).sort((a, b) => b.p.score - a.p.score);
-  $('#endRank').innerHTML = rows.map(({ p }) => `<div class="${S.over.win.includes(p.id) ? 'win' : ''}"><span>${S.over.win.includes(p.id) ? '👑 ' : ''}${esc(p.name)}</span><b>${p.score}</b></div>`).join('');
+  $('#endRank').innerHTML = rows.map(({ p }) => `<div class="${S.over.win.includes(p.id) ? 'win' : ''}"><span>${avatarHTML(p, S.pl.indexOf(p))}${S.over.win.includes(p.id) ? '👑 ' : ''}${esc(p.name)}</span><b>${p.score}</b></div>`).join('');
   const w = S.pl.filter(p => S.over.win.includes(p.id)).map(p => p.name).join(' & ');
   const iWon = S.over.win.includes(me.id);
   $('#endTitle').textContent = iWon ? '🏆 Victoire !' : (myIndex() < 0 ? 'Fin de partie' : 'Perdu… 😅');
@@ -557,6 +562,8 @@ $('#msg').addEventListener('click', async e => {
     } catch (err) { FX.toast('Déjà proposé ou impossible'); }
   }
 });
+$('#btnRules').onclick = () => $('#rulesOv').classList.add('on');
+$('#rulesClose').onclick = () => $('#rulesOv').classList.remove('on');
 $('#endClose').onclick = () => $('#endOv').classList.remove('on');
 $('#endAgain').onclick = () => { $('#endOv').classList.remove('on'); startGame(); };
 $('#btnSnd').onclick = () => { FX.setMuted(!FX.isMuted()); $('#btnSnd').textContent = FX.isMuted() ? '🔇' : '🔊'; FX.ac(); };
@@ -593,16 +600,20 @@ function connect(code, create) {
     $('#lbJoin').hidden = true; $('#lbWait').hidden = false; $('#lbCode').textContent = code;
     const last = info.last && (info.last.t ? info.last : info.last.data);
     if (last && last.t === 'state') onState(last.s);
+    sayHi();
     renderLobby(); renderPlayers(); $('#roomTag').hidden = false; $('#roomTag').textContent = code; $('#btnLeave').hidden = false;
     if (S) updatePreview();
   });
   room.on('players', list => {
-    roomPlayers = list; renderLobby();
+    roomPlayers = list; renderLobby(); sayHi();
     if (S) { renderPlayers(); updatePreview(); renderEnd(); }
   });
   room.on('message', (d, from) => {
     if (!d || typeof d !== 'object') return;
     if (d.t === 'state') onState(d.s);
+    else if (d.t === 'hi') {
+      if (from && okUrl(d.av) && avatars[from.id] !== d.av) { avatars[from.id] = d.av; renderLobby(); renderPlayers(); if (S && S.phase === 'over') renderEnd(); }
+    }
     else if (d.t === 'react') { FX.floatEmoji(d.e, from && from.name); FX.sfx.react(); }
   });
   room.on('error', msg => {

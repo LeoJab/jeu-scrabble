@@ -69,7 +69,7 @@ button, input { font: inherit; color: inherit; }
 .pl.turn { background: var(--yellow); transform: translateY(-2px) scale(1.04); animation: glow 1.4s ease-in-out infinite; }
 .pl.away { opacity: .5; }
 @keyframes glow { 50% { box-shadow: 3px 3px 0 var(--ink), 0 0 14px 4px #fff27a; } }
-.av { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; color: #fff; font-size: 14px; flex: none; object-fit: cover; }
+.av { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; color: #fff; font-size: 14px; flex: none; object-fit: cover; }
 .pn { display: flex; flex-direction: column; line-height: 1.05; min-width: 0; }
 .pn b { font-size: 12px; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pn .sc { font-size: 20px; font-weight: 900; }
@@ -120,6 +120,15 @@ button, input { font: inherit; color: inherit; }
 @media (max-height: 740px) and (max-aspect-ratio: 11/10) { #histBox { display: none; } #reacts { display: none; } :root { --bs: min(calc(100vw - 16px), calc(100dvh - 300px)); } }
 
 /* Overlays */
+.rules { text-align: left; max-height: 92dvh; display: flex; flex-direction: column; width: min(94vw, 520px); }
+.rules h2 { text-align: center; }
+.rbody { overflow-y: auto; padding-right: 4px; font-size: 14px; font-weight: 700; }
+.rbody h3 { margin: 12px 0 2px; color: var(--blue); font-size: 15px; }
+.rbody p, .rbody li { margin: 3px 0; }
+.rbody ul { margin: 4px 0; padding-left: 18px; }
+.chips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.chip { display: inline-block; min-width: 34px; text-align: center; border: 2px solid var(--ink); border-radius: 6px; padding: 1px 4px; font-size: 12px; color: #fff; }
+.chip.pLD { color: var(--ink); }
 .ov { position: fixed; inset: 0; background: rgba(18,16,43,.82); display: none; place-items: center; z-index: 60; padding: 12px; overflow: auto; }
 .ov.on { display: grid; }
 .card { background: #fff; border: 4px solid var(--ink); border-radius: 20px; box-shadow: 6px 6px 0 var(--ink); padding: 18px; width: min(94vw, 440px); text-align: center; animation: pop .35s both; }
@@ -140,6 +149,7 @@ button, input { font: inherit; color: inherit; }
 .swap-rack .rtile.sel { transform: translateY(-9px); }
 .rank { display: grid; gap: 6px; margin: 10px 0; }
 .rank div { display: flex; justify-content: space-between; align-items: center; background: #f2f4ff; border: 3px solid var(--ink); border-radius: 12px; padding: 6px 12px; font-size: 18px; }
+.rank div span { display: flex; align-items: center; gap: 8px; }
 .rank div.win { background: var(--yellow); transform: scale(1.04); }
 
 /* FX */

@@ -12,6 +12,7 @@
     <b class="logo">SCRABBLE</b>
     <span id="roomTag" hidden></span>
     <span class="sp"></span>
+    <button id="btnRules" class="mini" title="Règles du jeu">❓</button>
     <button id="btnSnd" class="mini" title="Son">🔊</button>
     <button id="btnLeave" class="mini" title="Quitter la salle" hidden>🚪</button>
   </header>
@@ -67,6 +68,37 @@
 
 <!-- Fin de partie -->
 <div id="endOv" class="ov"><div class="card"><h2 id="endTitle">Fin de partie</h2><div class="rank" id="endRank"></div><p id="endNote"></p><div class="row"><button class="btn" id="endClose">Voir le plateau</button><button class="btn main" id="endAgain">Rejouer</button></div></div></div>
+
+<!-- Règles -->
+<div id="rulesOv" class="ov"><div class="card rules">
+  <h2>📖 Règles du Scrabble</h2>
+  <div class="rbody">
+    <h3>Le but</h3>
+    <p>Pose des lettres pour former des mots, comme des mots croisés. Chaque mot rapporte des points : le plus gros score gagne !</p>
+    <h3>Ton tour</h3>
+    <p>Tu as 7 lettres. Glisse-les (ou touche une lettre puis une case) sur le plateau, <b>en ligne ou en colonne</b>, puis appuie sur <b>Jouer</b>. Tu repioches pour retrouver 7 lettres.</p>
+    <ul>
+      <li>Le <b>1er mot</b> couvre l'étoile ★ du centre (2 lettres minimum).</li>
+      <li>Ensuite, ton mot doit <b>toucher</b> des lettres déjà posées.</li>
+      <li>Tous les mots formés (y compris ceux qui se croisent) doivent être valides. Pas de noms propres ni de tirets.</li>
+      <li>Tu peux aussi <b>♻️ échanger</b> des lettres (s'il reste au moins 7 lettres dans le sac) ou <b>passer</b>.</li>
+    </ul>
+    <h3>Les cases bonus</h3>
+    <p class="chips"><span class="chip pLD">LD</span> lettre ×2 <span class="chip pLT">LT</span> lettre ×3 <span class="chip pMD">MD</span> mot ×2 <span class="chip pMT">MT</span> mot ×3</p>
+    <p>Les bonus ne comptent que <b>la 1re fois</b>, pour les lettres que tu viens de poser.</p>
+    <h3>Les points</h3>
+    <p>1 pt : A E I L N O R S T U · 2 pts : D G M · 3 pts : B C P · 4 pts : F H V · 8 pts : J Q · 10 pts : K W X Y Z.</p>
+    <p>Le <b>joker ★</b> (2 dans le sac) remplace n'importe quelle lettre mais vaut 0 point.</p>
+    <p>🎆 Poser tes <b>7 lettres d'un coup</b> = un <b>SCRABBLE</b> : <b>+50 points</b> !</p>
+    <h3>La fin de partie</h3>
+    <p>La partie s'arrête quand le sac est vide et qu'un joueur a posé toutes ses lettres, ou après 6 tours de suite sans points. Chacun perd la valeur des lettres qui lui restent (le joueur qui a fini les récupère).</p>
+    <h3>Dictionnaire</h3>
+    <p>Quand le dico est actif, les mots invalides sont refusés. Sinon, un adversaire peut <b>contester</b> ton dernier coup : il est annulé et tu perds ton tour.</p>
+    <h3>Commandes</h3>
+    <p>↩︎ reprend tes lettres (Échap) · 🔀 mélange le chevalet · Entrée valide le coup · 👏😂🔥 envoient une réaction aux autres.</p>
+  </div>
+  <div class="row"><button class="btn main" id="rulesClose">C'est parti !</button></div>
+</div></div>
 
 <canvas id="fx"></canvas>
 <div id="banners"></div>
