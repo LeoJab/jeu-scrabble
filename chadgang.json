@@ -1,0 +1,10 @@
+{
+  "title": "Scrabble",
+  "description": "Le vrai Scrabble en ligne : 2 à 4 potes, bonus, jokers, SCRABBLE à 7 lettres et feux d'artifice garantis.",
+  "author": "ChadGang",
+  "category": "Mots",
+  "emoji": "🔤",
+  "joueurs": "2-4",
+  "image": "cover.png",
+  "classement": "victoires"
+}

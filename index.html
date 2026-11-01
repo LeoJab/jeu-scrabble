@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scrabble · ChadGangGames</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header id="top">
+    <b class="logo">SCRABBLE</b>
+    <span id="roomTag" hidden></span>
+    <span class="sp"></span>
+    <button id="btnSnd" class="mini" title="Son">🔊</button>
+    <button id="btnLeave" class="mini" title="Quitter la salle" hidden>🚪</button>
+  </header>
+  <div id="main">
+    <div id="left"><div id="board"></div></div>
+    <div id="side">
+      <div id="players"></div>
+      <div id="msg"></div>
+      <div id="rackWrap"><div id="rack"></div></div>
+      <div id="actions">
+        <button id="bPlay" class="btn main" disabled>Jouer</button>
+        <button id="bRecall" class="btn" title="Reprendre les lettres (Échap)">↩︎</button>
+        <button id="bShuffle" class="btn" title="Mélanger">🔀</button>
+        <button id="bSwap" class="btn">♻️ Échanger</button>
+        <button id="bPass" class="btn">Passer</button>
+      </div>
+      <div id="info"><span id="bagInfo"></span><span id="dicoInfo"></span></div>
+      <div id="reacts">
+        <button data-e="👏">👏</button><button data-e="😂">😂</button><button data-e="😱">😱</button><button data-e="🔥">🔥</button><button data-e="💀">💀</button><button data-e="🤡">🤡</button>
+      </div>
+      <details id="histBox"><summary>Historique</summary><ol id="hist"></ol></details>
+    </div>
+  </div>
+</div>
+
+<!-- Salon -->
+<div id="lobby" class="ov on">
+  <div class="card">
+    <h2>🔤 Scrabble</h2>
+    <div id="lbJoin">
+      <p>Joue avec tes potes (2 à 4 joueurs). Crée une salle ou entre le code d'un ami.</p>
+      <input id="code" maxlength="12" placeholder="CODE" autocomplete="off">
+      <div class="err" id="lbErr"></div>
+      <div class="row"><button id="bCreate" class="btn main">Créer une salle</button><button id="bJoin" class="btn">Rejoindre</button></div>
+    </div>
+    <div id="lbWait" hidden>
+      <p>Code de la salle</p>
+      <div class="big-code" id="lbCode"></div>
+      <p>Partage-le ou utilise le bouton « Inviter » du hub.</p>
+      <div class="lb-list" id="lbList"></div>
+      <div class="err" id="lbErr2"></div>
+      <div class="row"><button id="bStart" class="btn main">Lancer la partie !</button></div>
+      <p id="lbHint"></p>
+    </div>
+  </div>
+</div>
+
+<!-- Joker -->
+<div id="jokerOv" class="ov"><div class="card"><h2>Joker ★</h2><p>Quelle lettre veut-il être ?</p><div class="pick-grid" id="jokerGrid"></div><div class="row"><button class="btn" id="jokerCancel">Annuler</button></div></div></div>
+
+<!-- Échange -->
+<div id="swapOv" class="ov"><div class="card"><h2>♻️ Échanger</h2><p>Touche les lettres à renvoyer dans le sac. Ça passe ton tour.</p><div class="swap-rack" id="swapRack"></div><div class="row"><button class="btn" id="swapCancel">Annuler</button><button class="btn main" id="swapOk">Échanger</button></div></div></div>
+
+<!-- Fin de partie -->
+<div id="endOv" class="ov"><div class="card"><h2 id="endTitle">Fin de partie</h2><div class="rank" id="endRank"></div><p id="endNote"></p><div class="row"><button class="btn" id="endClose">Voir le plateau</button><button class="btn main" id="endAgain">Rejouer</button></div></div></div>
+
+<canvas id="fx"></canvas>
+<div id="banners"></div>
+<div id="toasts"></div>
+
+<script src="/_sdk.js"></script>
+<script src="fx.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
